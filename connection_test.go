@@ -2,10 +2,11 @@ package utils_test
 
 import (
 	"fmt"
-	utils "goutils/internal"
+
 	"testing"
 	"time"
 
+	utils "github.com/axdbertuol/goutils"
 	"github.com/spf13/viper"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/mock"

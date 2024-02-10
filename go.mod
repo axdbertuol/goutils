@@ -1,4 +1,4 @@
-module goutils
+module github.com/axdbertuol/goutils
 
 go 1.20
 
