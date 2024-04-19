@@ -36,6 +36,7 @@ func ErrorMiddleware(next echo.HandlerFunc) echo.HandlerFunc {
 			}
 			return c.JSON(http.StatusInternalServerError, customErr)
 		}
+
 		return nil
 	}
 }
