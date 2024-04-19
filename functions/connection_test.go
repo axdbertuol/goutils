@@ -1,4 +1,4 @@
-package main_test
+package funcs_test
 
 import (
 	"fmt"
@@ -6,7 +6,7 @@ import (
 	"testing"
 	"time"
 
-	utils "github.com/axdbertuol/goutils"
+	utils "github.com/axdbertuol/goutils/functions"
 	"github.com/spf13/viper"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/mock"
