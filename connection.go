@@ -1,4 +1,4 @@
-package utils
+package main
 
 import (
 	"fmt"
@@ -19,7 +19,12 @@ func OpenDatabaseConnection(dbConnStr string) (*gorm.DB, error) {
 	return db, nil
 }
 
-func ConnectToDb(dbConnStr string, dbConnector DBConnector, retryDelay time.Duration, maxRetries int) (*gorm.DB, error) {
+func ConnectToDb(
+	dbConnStr string,
+	dbConnector DBConnector,
+	retryDelay time.Duration,
+	maxRetries int,
+) (*gorm.DB, error) {
 	var db *gorm.DB
 	var err error
 

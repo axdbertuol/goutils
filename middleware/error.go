@@ -1,22 +1,11 @@
 package custom_middleware
 
 import (
-	"fmt"
 	"net/http"
 
+	"github.com/axdbertuol/goutils/types"
 	"github.com/labstack/echo/v4"
 )
-
-type CustomError struct {
-	Code         int    `json:"code"`
-	Message      string `json:"message"`
-	InternalCode string `json:"internal_code"`
-}
-
-// Error returns the error message.
-func (ce *CustomError) Error() string {
-	return fmt.Sprintf("%s: %s", ce.InternalCode, ce.Message)
-}
 
 // Custom error handler middleware
 func ErrorMiddleware(next echo.HandlerFunc) echo.HandlerFunc {
@@ -24,12 +13,12 @@ func ErrorMiddleware(next echo.HandlerFunc) echo.HandlerFunc {
 		err := next(c)
 		if err != nil {
 			// Check if the error is of type CustomError
-			if customErr, ok := err.(*CustomError); ok {
+			if customErr, ok := err.(*types.CustomError); ok {
 				// Return custom error response
 				return c.JSON(customErr.Code, customErr)
 			}
 			// If the error is not a CustomError, return a generic internal server error
-			customErr := &CustomError{
+			customErr := &types.CustomError{
 				Code:         http.StatusInternalServerError,
 				Message:      "Internal Server Error",
 				InternalCode: "unexpectedError",

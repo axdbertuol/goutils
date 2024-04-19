@@ -1,4 +1,4 @@
-package utils_test
+package main_test
 
 import (
 	"fmt"
@@ -49,7 +49,12 @@ func TestConnectToDb_SuccessfulConnection(t *testing.T) {
 	}
 
 	// Call the utils.ConnectToDb function with the mock DBConnector
-	result, err := utils.ConnectToDb(dbConnStr, mockDBConnector, defaultRetryDelay, defaultMaxRetries)
+	result, err := utils.ConnectToDb(
+		dbConnStr,
+		mockDBConnector,
+		defaultRetryDelay,
+		defaultMaxRetries,
+	)
 	assert.NoError(t, err)
 	// Verify that the utils.ConnectToDb function returns the expected result
 	assert.NotNil(t, result)
@@ -65,7 +70,12 @@ func TestConnectToDb_FailedConnection(t *testing.T) {
 	}
 
 	// Call the utils.ConnectToDb function with the mock DBConnector
-	result, err := utils.ConnectToDb(dbConnStr, mockDBConnector, defaultRetryDelay, defaultMaxRetries)
+	result, err := utils.ConnectToDb(
+		dbConnStr,
+		mockDBConnector,
+		defaultRetryDelay,
+		defaultMaxRetries,
+	)
 
 	// Verify that the utils.ConnectToDb function returns an error
 	assert.Error(t, err)
