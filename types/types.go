@@ -1,6 +1,6 @@
 package types
 
-import "fmt"
+import "strconv"
 
 type CustomError struct {
 	Code         int    `json:"code"`
@@ -10,5 +10,11 @@ type CustomError struct {
 
 // Error returns the error message.
 func (ce *CustomError) Error() string {
-	return fmt.Sprintf("%s: %s", ce.InternalCode, ce.Message)
+	json := `{
+		"message": "` + ce.Message + `",
+		"success": false,
+		"internalCode": "` + ce.InternalCode + `",
+		"code": ` + strconv.Itoa(ce.Code) + `
+	}`
+	return json
 }
