@@ -19,7 +19,7 @@ func ErrorMiddleware(next echo.HandlerFunc) echo.HandlerFunc {
 			// Check if the error is of type CustomError
 			if customErr, ok := err.(*types.CustomError); ok {
 				// Return custom error response
-				return c.JSON(customErr.Code, &ErrorWrap{Error: customErr})
+				return echo.NewHTTPError(customErr.Code, &ErrorWrap{Error: customErr})
 			}
 			// If the error is not a CustomError, return a generic internal server error
 			customErr := &types.CustomError{
@@ -28,7 +28,7 @@ func ErrorMiddleware(next echo.HandlerFunc) echo.HandlerFunc {
 				InternalCode: "unexpectedError",
 			}
 
-			return c.JSON(http.StatusInternalServerError, &ErrorWrap{Error: customErr})
+			return echo.NewHTTPError(http.StatusInternalServerError, &ErrorWrap{Error: customErr})
 		}
 
 		return nil
