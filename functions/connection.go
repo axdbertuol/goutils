@@ -50,7 +50,7 @@ func GetConnection(viper *viper.Viper) (*string, error) {
 	// Read database connection parameters
 	databaseHost := viper.GetString("DATABASE_HOST")
 	databasePort := viper.GetInt("DATABASE_PORT")
-	databaseUsername := viper.GetString("DATABASE_USERNAME")
+	databaseUsername := viper.GetString("DATABASE_USER")
 	databasePassword := viper.GetString("DATABASE_PASSWORD")
 	databaseDBName := viper.GetString("DATABASE_DBNAME")
 	if databaseDBName == "" ||
