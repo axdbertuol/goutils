@@ -18,10 +18,15 @@ func ErrorMiddleware(next echo.HandlerFunc) echo.HandlerFunc {
 		if err != nil {
 			// Check if the error is of type CustomError
 			if customErr, ok := err.(*types.CustomError); ok {
-				// Return custom error response
 				return echo.NewHTTPError(customErr.Code, &ErrorWrap{Error: customErr})
+			} else if eHttpErr, ok := err.(*echo.HTTPError); ok {
+				return echo.NewHTTPError(eHttpErr.Code, &ErrorWrap{Error: &types.CustomError{
+					Code:         eHttpErr.Code,
+					Message:      eHttpErr.Message.(string),
+					InternalCode: "unexpectedHttpError",
+				}})
 			}
-			// If the error is not a CustomError, return a generic internal server error
+
 			customErr := &types.CustomError{
 				Code:         http.StatusInternalServerError,
 				Message:      "Internal Server Error",
